@@ -1,0 +1,79 @@
+@font-face {
+	font-family:'icons';
+	src: url('../fonts/icons.woff') format('woff');
+	font-weight: 400;
+	font-style: normal;
+}
+
+#sharing-btns {
+	[data-position="vertical"] {
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+		.sharing-btns-item {
+			&:not(:last-child) {
+				margin-bottom: 10px;
+			}
+		}
+	}
+	
+	[data-position="horizontal"] {
+		display: flex;
+		.sharing-btns-item {
+			&:not(:last-child) {
+				margin-right: 10px;
+			}
+		}
+	}
+	.sharing-btns-item {
+		position: relative;
+		width: 30px;
+		height: 30px;
+		font-family: 'icons';
+		cursor: pointer;
+		border-radius: 4px;
+		&:hover {
+			opacity: .8;
+			transition: .2s;
+		}
+		&:after {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			content: '';
+			color: #fff;
+			font-size: 18px;
+		}
+	}
+	&.fixed {
+		position: fixed;
+		top: 50%;
+		left: 10px;
+		transform: translateY(-50%);
+	}
+	.facebook {
+		background: #3B5998;
+		&:after {
+			content: '\e900';
+		}
+	}
+	.twitter {
+		background: #55ACEE;
+		&:after {
+			content: '\e901';
+		}
+	}
+	.reddit {
+		background: #ff4500;
+		&:after {
+			content: '\e902';
+		}
+	}
+	.vk {
+		background: #4D75A3;
+		&:after {
+			content: '\e903';
+		}
+	}
+}

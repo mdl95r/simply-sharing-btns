@@ -10,52 +10,52 @@ export class sharingBtns {
 		this.options = Object.assign(defaultOptions, options)
 		this.$el = document.querySelector(selector)
 		if (this.$el) {
-			this.#render(this.options)
-			this.#init()
+			this.#render(this.options);
+			this.#buttonsClick();
 		} else {
-			console.error('sharing-btns is not defined in markup!')
+			console.error('sharing-btns is not defined in markup!');
 		}
 	}
 
 	#render(props) {
 		this.$el.classList.add('sharing-btns');
 		this.$el.innerHTML = getTemplate(props);
-		const { fixed } = props
+		const { fixed } = props;
 		if (fixed) {
 			this.$el.classList.add('fixed');
 		}
 	}
 
-	#init() {
+	#buttonsClick() {
 		const items = this.$el.querySelectorAll('[data-social]');
 		items.forEach(el => {
 			el.addEventListener('click', function (e) {
-				const data = e.target.dataset.social
+				const data = e.target.dataset.social;
 				cases(data);
 			})
 		});
 		const cases = (data) => {
-			const currentUrl = window.location.href
-			const currentTitle = document.title
-			let currentDescription = document.querySelector('meta[name="description"]')
-			currentDescription = currentDescription.getAttribute('content')
+			const currentUrl = window.location.href;
+			const currentTitle = document.title;
+			let currentDescription = document.querySelector('meta[name="description"]');
+			currentDescription = currentDescription.getAttribute('content');
 			let url = ''
 			switch (data) {
 				case 'vk':
-					url = `https://vk.com/share.php?url=${currentUrl}&title=${encodeURIComponent(currentTitle)}&description=${encodeURIComponent(currentDescription)}`
+					url = `https://vk.com/share.php?url=${currentUrl}&title=${encodeURIComponent(currentTitle)}&description=${encodeURIComponent(currentDescription)}`;
 					showPopup(url);
 					break;
 
 				case 'twitter':
-					url = `https://twitter.com/share?url=${currentUrl}&title=${encodeURIComponent(currentTitle)}&description=${encodeURIComponent(currentDescription)}`
+					url = `https://twitter.com/share?url=${currentUrl}&title=${encodeURIComponent(currentTitle)}&description=${encodeURIComponent(currentDescription)}`;
 					showPopup(url);
 					break;
 				case 'facebook':
-					url = `https://www.facebook.com/sharer.php?s=100?url=${currentUrl}&title=${encodeURIComponent(currentTitle)}&description=${encodeURIComponent(currentDescription)}`
+					url = `https://www.facebook.com/sharer.php?s=100?url=${currentUrl}&title=${encodeURIComponent(currentTitle)}&description=${encodeURIComponent(currentDescription)}`;
 					showPopup(url);
 					break;
 				case 'reddit':
-					url = `https://www.reddit.com/submit?url=${currentUrl}&title=${encodeURIComponent(currentTitle)}&description=${encodeURIComponent(currentDescription)}`
+					url = `https://www.reddit.com/submit?url=${currentUrl}&title=${encodeURIComponent(currentTitle)}&description=${encodeURIComponent(currentDescription)}`;
 					showPopup(url);
 					break;
 

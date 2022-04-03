@@ -1,5 +1,4 @@
 import getTemplate from './template';
-
 export class sharingBtns {
 	constructor(selector, options) {
 		let defaultOptions = {
@@ -26,43 +25,45 @@ export class sharingBtns {
 		}
 	}
 
-	#buttonsClick() {
+	#buttonsClick = () => {
 		const items = this.$el.querySelectorAll('[data-social]');
 		items.forEach(el => {
-			el.addEventListener('click', function (e) {
+			el.addEventListener('click', (e) => {
 				const data = e.target.dataset.social;
-				cases(data);
+				this.#cases(data);
 			})
 		});
-		const cases = (data) => {
-			const currentUrl = window.location.href;
-			const currentTitle = document.title;
-			let currentDescription = document.querySelector('meta[name="description"]');
-			currentDescription = currentDescription.getAttribute('content');
-			let url = ''
-			switch (data) {
-				case 'vk':
-					url = `https://vk.com/share.php?url=${currentUrl}&title=${encodeURIComponent(currentTitle)}&description=${encodeURIComponent(currentDescription)}`;
-					showPopup(url);
-					break;
+	}
 
-				case 'twitter':
-					url = `https://twitter.com/share?url=${currentUrl}&title=${encodeURIComponent(currentTitle)}&description=${encodeURIComponent(currentDescription)}`;
-					showPopup(url);
-					break;
-				case 'facebook':
-					url = `https://www.facebook.com/sharer.php?s=100?url=${currentUrl}&title=${encodeURIComponent(currentTitle)}&description=${encodeURIComponent(currentDescription)}`;
-					showPopup(url);
-					break;
-				case 'reddit':
-					url = `https://www.reddit.com/submit?url=${currentUrl}&title=${encodeURIComponent(currentTitle)}&description=${encodeURIComponent(currentDescription)}`;
-					showPopup(url);
-					break;
+	#cases = (data) => {
+		const currentUrl = window.location.href;
+		const currentTitle = document.title;
+		let currentDescription = document.querySelector('meta[name="description"]');
+		currentDescription = currentDescription.getAttribute('content');
+		let url = ''
+		switch (data) {
+			case 'vk':
+				url = `https://vk.com/share.php?url=${currentUrl}&title=${encodeURIComponent(currentTitle)}&description=${encodeURIComponent(currentDescription)}`;
+				this.#showPopup(url);
+				break;
 
-			}
+			case 'twitter':
+				url = `https://twitter.com/share?url=${currentUrl}&title=${encodeURIComponent(currentTitle)}&description=${encodeURIComponent(currentDescription)}`;
+				this.#showPopup(url);
+				break;
+			case 'facebook':
+				url = `https://www.facebook.com/sharer.php?s=100?url=${currentUrl}&title=${encodeURIComponent(currentTitle)}&description=${encodeURIComponent(currentDescription)}`;
+				this.#showPopup(url);
+				break;
+			case 'reddit':
+				url = `https://www.reddit.com/submit?url=${currentUrl}&title=${encodeURIComponent(currentTitle)}&description=${encodeURIComponent(currentDescription)}`;
+				this.#showPopup(url);
+				break;
+
 		}
-		const showPopup = (url) => {
-			window.open(url, '', 'toolbar=0,status=0,width=626,height=436');
-		}
+	}
+
+	#showPopup = (url) => {
+		window.open(url, '', 'toolbar=0,status=0,width=626,height=436');
 	}
 }
